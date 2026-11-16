@@ -1,0 +1,42 @@
+# local config (may contain API keys / data paths)
+config_local.py
+
+# generated work/output
+.work/
+output/
+output_tmp_*/
+output_*/
+delivery/
+*_parts/
+
+# datasets and archives
+raw_dataset/
+data/
+my_ugc_project/
+*.zip
+*.part1of2
+*.part2of2
+
+# intermediates
+_ledger.json
+_reencode_log.jsonl
+_copy_verify.json
+_copy_sha256.json
+_cost_estimate.json
+*.log
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# demo outputs (keep scripts, ignore generated data)
+examples/demo/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
