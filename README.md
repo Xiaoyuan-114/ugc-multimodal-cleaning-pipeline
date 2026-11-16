@@ -58,8 +58,8 @@ A configurable, auditable pipeline for cleaning large user-generated-content (UG
 ├── step1_inventory.py ... step7_finalize.py
 ├── y1_build_samples.py ... y10_split_zip.py
 ├── docs/
-│   ├── cleaning-pipeline.md
-│   └── stimuli-packaging.md
+│   ├── [cleaning-pipeline.md](docs/cleaning-pipeline.md)
+│   └── [stimuli-packaging.md](docs/stimuli-packaging.md)
 └── examples/
     ├── make_demo.py          # 生成合成小数据集（不联网）
     ├── demo_config.py
@@ -156,6 +156,18 @@ TABLES = [
 ```
 
 `IMAGE_DIRS` 把平台短码映射到图片根目录。图片目录下按 `<source_id>/` 分子文件夹；源 ID 与图片文件夹同名是硬约定。
+
+## 换到你的数据时，至少要改这些
+
+| 位置 | 改什么 |
+|---|---|
+| `config_local.py` | `ROOT` / `DATA` / `WORK`、`PLATFORMS` / `PREFIX`、`IMAGE_DIRS`、`TABLES` |
+| `config_local.py` | `DOMAIN_CONTEXT`、`LOCAL_TOKENS`、`SCOPE_GUARD_ENABLED` / `SCOPE_KEYWORD` |
+| `adjudicate.py` | 如果你的数据不是旅游/地方体验类 UGC，改写 `AD_RULE_*` / `UNUSABLE_IMG` / `REC_PROMPT` 里的领域规则；**评分口径不要混进清洗提示词** |
+| `config_local.py` | `TEXT_FIELDS`、`LANDMARK_TOKENS`、`SCORING_TERMS`、`PROMPT_FILE`、`ZIP_REQUIRED_ENTRIES` |
+| `config_local.py` | 交付目录名 / 压缩包名 / 分卷目录（`DELIVERY_TOP_NAME` 等） |
+
+`step3` 的表结构完全由 `TABLES` 驱动；如果表格式更复杂（多级表头、合并单元格、非 UTF-8 CSV），在 `step3_records.py` 的 `iter_table()` 里加一个 reader 分支即可。
 
 ## 输出
 
